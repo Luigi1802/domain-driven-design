@@ -47,5 +47,6 @@ A la mise en ligne de l'évènement, le spectateur peut consulter l'évènement 
 - choisir l'évènement
 - choisir sa place
 - ajouter sa place dans son panier
-- valider son panier et payer
+- valider son panier
+- payer
 - recevoir son ticket
