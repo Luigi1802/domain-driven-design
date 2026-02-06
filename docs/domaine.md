@@ -8,7 +8,7 @@ Notre sujet porte sur un système de vente en ligne de billets pour prendre une 
 
 L'enjeu est de metttre à disposition une plateforme dans laquelle les utilisateurs peuvent choisir un évènement parmi la programmation, réserver une place, payer la place et recevoir son billet.
 
-Comme contraintes, nous avons la gestion des vagues d'affluence à la réservation, mais aussi la fiabilité des informations liées aux évènement (date, places restantes, authenticité et unicité des billets).
+Comme contraintes, nous avons la gestion des vagues d'affluence à la réservation, mais aussi la fiabilité des informations liées aux évènement (date, places restantes, authenticité et unicité des billets). Une erreur de gestion peut entrainer une survente, une mauvaise expérience client ou une perte de chiffre d'affaires
 
 # Rôles utilisateurs
 
@@ -16,7 +16,7 @@ Role 1: Spectateur (client B2C); c'est l'utilisateur venant sur la plateforme po
 
 Role 2: Programmateur (client B2B); c'est l'utilisateur venant saisir un nouvel évènenement et y renseigner les informations (artiste, date, salle, nombre de places, tarifs)
 
-Role 3: Développeur (opérationnel) ; c'est le réalisateur technique des évolution et de la maintenance des fonctionnalités du site. C'est le point de contact du role Programmateur
+Role 3: Agent de billeterie (opérationnel) ; gère les problèmes liés aux réservations, paiements échoués, annulations et réclamations client.
 
 Role 4: Directeur commercial (direction) ; c'est le donneur d'ordre sur les fonctionnalités opérationnelles de la plateforme.
 
@@ -42,4 +42,4 @@ Prenons le scénario de mise en ligne d'un concert de rock. Un programmateur ann
 - date d'ouverture des réservations
 - description de l'évènement
 
-A la mise en ligne de l'évènement, le spectateur peut consulter l'évènement sans réserver avant la date communiquée. La direction commerciale consulte les évènements mis en ligne pour projeter l'activité et l'affluence à venir sur le site, nécessitant un dialogue avec les développeurs. La direction commerciale est aussi en charge de la promotion des évènement, la mise en avant sur la plateforme et le suivi des ventes, nécessitant un dialogue avec les programmateurs. Le développeur s'assure du dimensionnnment l'infrastructure et la robustesse de la plateforme. Le jour de l'ouverture de la réservation, l'utilisateur se connecte et choisit l'évènement pour acheter sa place
+A la mise en ligne de l'évènement, le spectateur peut consulter l'évènement sans réserver avant la date communiquée. La direction commerciale consulte les évènements mis en ligne pour projeter l'activité et l'affluence à venir sur le site, nécessitant un dialogue avec les développeurs. La direction commerciale est aussi en charge de la promotion des évènement, la mise en avant sur la plateforme et le suivi des ventes, nécessitant un dialogue avec les agents de billeterie. L'agent de billeterie  gère les problèmes liés aux réservations, paiements échoués, annulations et réclamations client. Le jour de l'ouverture de la réservation, l'utilisateur se connecte et choisit l'évènement pour acheter sa place.
