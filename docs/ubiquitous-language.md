@@ -5,6 +5,7 @@
 ### Liste des contextes
 
 - ContexteRéférencement
+- ContexteInterface
 - ContexteRéservation
 - ContextePaiement
 - ContexteNotification
