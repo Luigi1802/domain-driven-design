@@ -36,9 +36,6 @@
 | AffichageRéferentiel | ContexteRéférencement
 | Promotion | ContexteRéférencement
 
-
-
-
 ## Définitions des termes
 
 ### Spectateur
