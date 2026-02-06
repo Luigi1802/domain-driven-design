@@ -32,4 +32,6 @@ Contextes sources : ContexteRéservation, ContexteRéférencement
 Exemple : ContexteRéservation va envoyer un message pour demander à ContexteNotification l'envoi d'un email contenant le billet acheté à la fin d'une réservation.
 
 #### Paiement
-communication par appels API 
+Déclenchement d'un tunnel de paiement par communication avec les API des banques (3D Secure, AIS, ...). Vérification des informations de l'émetteur, validation de la transaction.
+Contexte source: ContextePaiement
+Exemple : ContextePaiement va envoyer un requete API de demande de transaction à la banque contenant les informations bancaire, la banque prend le relais et renvoie une confirmation ou un echec de paiement.
