@@ -10,7 +10,7 @@
 - ContextePaiement
 - ContexteNotification
 
-### Tableau
+### Association terme / bounded context
 
 | Terme | Contexte principal | Commentaire |
 |-------|--------------------|-------------|
