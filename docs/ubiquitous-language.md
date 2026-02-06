@@ -102,8 +102,17 @@ Action consistant à accéder aux informations d'un Évènement référencé à 
 Exemple concret: 
 Un spectateur curieux des prochains évènements dans sa région clique sur un concert mentionné sur la page d'accueil de la plateforme.
 
-Paiement
-VerrouillagePlace
+## Paiement
+Définition métier:
+Action d'autorisation de prèlevement d'un montant sur le compte bancaire d'un spectateur. Le paiement permet de finaliser la Réservation et déclenche le processus d'envoie du mail contenant le billet.
+Exemple concret: 
+Un Spectateur a dans son panier la Place P1 pour l'Evènement E. Le spectateur valide son panier et entre ses informations bancaires pour payer sa Place et s'assurer de recevoir le billet en contrepartie
+
+## VerrouillagePlace
+Définition métier:
+Une Place est considérée verouillée lorsqu'elle est ajoutée à un Panier par un Spectateur. Cela la rend indisponible à la Réservation et donc éviter qu'une place ne se retrouve réservé par plusieurs Spectateurs. Un délai de vérouillage se lance pour ne pas qu'il y ai pas une rétention de Places abusive.
+Exemple concret:
+Un spectateur A sélectionne la Place P1 de l'Evènement E et l'ajoute dans son panier. Un spectateur B cherche à sékectionner une Place pour l'Evènement E: la Place P1 ne sera pas sélectionnable pour le spectateur B.
 
 ## AffichagePromotionnel
 Définition métier:
