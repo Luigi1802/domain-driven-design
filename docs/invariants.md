@@ -59,4 +59,6 @@
 
 ## Schéma UML des agrégats
 
-// TODO
+![diagramme](./agregat_evenement.png)
+
+![diagramme](./agregat_reservation.png)
