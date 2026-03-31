@@ -242,3 +242,78 @@ When un Agent de Billeterie tente de modifier manuellement les données du Bille
 Then le système rejette la modification avec l'erreur "Un Billet émis ne peut pas être modifié — toute correction nécessite l'annulation de la Réservation et la création d'une nouvelle Réservation"
   And le Billet original reste inchangé et valide avec les données de la Réservation R-00421
 ```
+
+---
+
+## Service de Domaine : PromouvoirÉvènement
+
+---
+
+### Invariant SD-1 — Promotion réservée aux Évènements éligibles
+
+#### Scénario 1 — Happy path
+```
+Given un Évènement "Concert Stromae – LDLC Arena, 18 octobre 2026" publié dans l'AffichageRéférentiel
+  And cet Évènement possède encore 340 Places disponibles sur 2 000
+  And un DirecteurCommercial est authentifié
+When le DirecteurCommercial décide de promouvoir cet Évènement via le service PromouvoirÉvènement
+Then le service vérifie que l'Évènement est publié et que des Places sont disponibles
+  And l'Évènement est inscrit dans l'AffichagePromotionnel
+  And un événement métier "ÉvènementPromu" est émis vers le ContexteRéférencement
+```
+
+#### Scénario 2 — Sad path
+```
+Given un Évènement "Concert Stromae – LDLC Arena, 18 octobre 2026" dont toutes les Places sont vendues ou verrouillées
+  And un DirecteurCommercial est authentifié
+When le DirecteurCommercial tente de promouvoir cet Évènement via le service PromouvoirÉvènement
+Then le service rejette l'opération avec le message "Cet Évènement ne peut pas être promu : aucune Place disponible à la réservation"
+  And l'AffichagePromotionnel reste inchangé
+```
+
+---
+
+### Invariant SD-2 — Décision portée par le DirecteurCommercial
+
+#### Scénario 1 — Happy path
+```
+Given un Évènement éligible à la promotion (publié, Places disponibles)
+  And un utilisateur authentifié avec le rôle DirecteurCommercial
+When il soumet une demande de promotion via le service PromouvoirÉvènement
+Then le service autorise l'opération
+  And l'Évènement est ajouté à l'AffichagePromotionnel
+```
+
+#### Scénario 2 — Sad path
+```
+Given un Évènement éligible à la promotion (publié, Places disponibles)
+  And un utilisateur authentifié avec le rôle Programmateur (rôle insuffisant)
+When il tente de déclencher le service PromouvoirÉvènement pour cet Évènement
+Then le service rejette l'opération avec l'erreur "Action non autorisée : seul le DirecteurCommercial peut modifier l'AffichagePromotionnel"
+  And l'AffichagePromotionnel reste inchangé
+```
+
+---
+
+### Invariant SD-3 — Cohérence entre AffichagePromotionnel et stock
+
+#### Scénario 1 — Happy path
+```
+Given un Évènement "Festival Jazz – Salle Pleyel" actuellement dans l'AffichagePromotionnel
+  And il reste 12 Places disponibles
+When un Spectateur réserve et paie les 12 dernières Places disponibles
+Then le service PromouvoirÉvènement détecte que le stock atteint zéro
+  And l'Évènement est automatiquement retiré de l'AffichagePromotionnel
+  And un événement métier "PromotionRetirée" est émis vers le ContexteRéférencement
+```
+
+#### Scénario 2 — Sad path
+```
+Given un Évènement "Festival Jazz – Salle Pleyel" actuellement dans l'AffichagePromotionnel
+  And le stock tombe à zéro suite à des réservations
+  And une défaillance technique empêche le service de détecter ce changement de stock
+When le service PromouvoirÉvènement ne reçoit pas la notification de stock épuisé
+Then l'Évènement reste affiché dans l'AffichagePromotionnel alors qu'aucune Place n'est disponible
+  And le Spectateur qui clique sur l'Évènement promu se retrouve face à un message "Complet"
+  And une alerte est remontée à l'AgentBilleterie pour correction manuelle
+```

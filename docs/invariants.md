@@ -62,3 +62,23 @@
 ![diagramme](./media/agregat_evenement.png)
 
 ![diagramme](./media/agregat_reservation.png)
+
+---
+
+## Service de Domaine : PromouvoirÉvènement
+
+### Rôle
+Encapsuler la logique de décision et de mise à jour de l'AffichagePromotionnel pour un Évènement référencé. Cette opération est transversale : elle mobilise des données du ContexteRéférencement (l'Évènement et ses informations), du ContexteRéservation (le stock de Places restantes, le rythme des ventes) et du rôle du DirecteurCommercial. Elle ne trouve pas naturellement sa place dans l'agrégat Évènement (qui ne connaît pas les règles commerciales) ni dans l'agrégat Réservation (qui ne pilote pas la visibilité).
+
+### Opérations encapsulées
+1. **Vérifier l'éligibilité à la promotion** : l'Évènement doit être référencé, publié dans l'AffichageRéférentiel, et posséder encore des Places disponibles. Un Évènement complet ou annulé ne peut pas être promu.
+2. **Évaluer l'opportunité commerciale** : consulter le taux de remplissage (Places vendues / Places totales) et la proximité de la Date de l'Évènement pour qualifier le besoin de promotion.
+3. **Modifier l'AffichagePromotionnel** : inscrire ou retirer l'Évènement de la liste des Évènements mis en avant, selon la décision du DirecteurCommercial.
+4. **Émettre un événement métier** : signaler au ContexteRéférencement que le statut promotionnel de l'Évènement a changé, afin que l'AffichageRéférentiel reflète la mise en avant.
+
+### Invariants propres au service
+| Invariant | Description |
+|-----------|-------------|
+| Promotion réservée aux Évènements éligibles | Seul un Évènement publié avec des Places encore disponibles peut figurer dans l'AffichagePromotionnel. |
+| Décision portée par le DirecteurCommercial | La modification de l'AffichagePromotionnel ne peut être déclenchée que par un utilisateur ayant le rôle DirecteurCommercial. |
+| Cohérence entre AffichagePromotionnel et stock | Si toutes les Places d'un Évènement promu sont vendues ou verrouillées, le service retire automatiquement l'Évènement de l'AffichagePromotionnel. |
