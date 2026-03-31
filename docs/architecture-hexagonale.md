@@ -26,63 +26,8 @@ La couche Adapters est **volatile** : on peut changer de base de données, de pr
 
 ## Schéma de l'architecture hexagonale
 
-```
-                    [ Interface Externe : Web UI / Mobile App ]
-                                      |
-                                      | HTTP REST
-                                      v
-        +------------------------------------------------------------------+
-        |                          ADAPTERS                                |
-        |                                                                  |
-        |  +------------------+     +------------------+                   |
-        |  | REST Adapter     |     | Messaging        |                   |
-        |  | (API HTTP)       |     | Adapter          |                   |
-        |  +------------------+     +------------------+                   |
-        |           |                         |                            |
-        |           v                         v                            |
-        |  +-------------------------------------------------------+       |
-        |  |              COUCHE APPLICATION                       |       |
-        |  |                                                       |       |
-        |  |  Services Applicatifs :                              |       |
-        |  |  - RéférencerÉvènement                               |       |
-        |  |  - CréerRéservation                                  |       |
-        |  |  - ValiderPaiement                                   |       |
-        |  |  - CommuniquerBillet                                 |       |
-        |  |                                                       |       |
-        |  |  Ports (contrats abstraits) :                        |       |
-        |  |  - RepositoryÉvènement                               |       |
-        |  |  - RepositoryRéservation                             |       |
-        |  |  - ServicePaiement                                   |       |
-        |  |  - ServiceNotification                               |       |
-        |  +-------------------------------------------------------+       |
-        |           |                         |                            |
-        |           v                         v                            |
-        |  +-------------------------------------------------------+       |
-        |  |               COUCHE DOMAINE (Core)                  |       |
-        |  |                                                       |       |
-        |  |  Agrégats :                                          |       |
-        |  |  - Évènement (racine)                                |       |
-        |  |  - Réservation (racine)                              |       |
-        |  |                                                       |       |
-        |  |  Entités : Évènement, Réservation, Spectateur        |       |
-        |  |                                                       |       |
-        |  |  Objets Valeur : Artiste, Salle, CatégoriePlace,     |       |
-        |  |  Place, Horaires, OuvertureRéservations, Panier,     |       |
-        |  |  VerrouillagePlace, Paiement, Billet                 |       |
-        |  |                                                       |       |
-        |  |  Invariants métier garantis par les agrégats         |       |
-        |  +-------------------------------------------------------+       |
-        |           |                         |                            |
-        |           v                         v                            |
-        |  +------------------+     +------------------+                   |
-        |  | DB Adapter       |     | External API     |                   |
-        |  | (PostgreSQL)     |     | Adapter (Banque) |                   |
-        |  +------------------+     +------------------+                   |
-        +------------------------------------------------------------------+
-                    |                         |
-                    v                         v
-        [ Base de données ]         [ API Bancaire 3D Secure ]
-```
+![diagramme](./media/architecture_hexagonale.png)
+
 
 ---
 
