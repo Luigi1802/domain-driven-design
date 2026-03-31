@@ -126,7 +126,7 @@ Then le système bloque la publication avec l'erreur "Les champs suivants sont o
 
 ---
 
-### Invariant 5 — Unicité de Place par Évènement
+### Invariant 1 — Unicité de Place par Évènement
 
 #### Scénario 1 — Happy path
 
@@ -153,7 +153,7 @@ Then le système rejette la sélection avec le message "Cette Place est temporai
 
 ---
 
-### Invariant 6 — Délai de verrouillage du Panier
+### Invariant 2 — Délai de verrouillage du Panier
 
 #### Scénario 1 — Happy path
 
@@ -181,7 +181,7 @@ Then le système libère automatiquement la Place "Fosse – Zone C – N°42"
 
 ---
 
-### Invariant 7 — Paiement obligatoire pour valider la Réservation
+### Invariant 3 — Paiement obligatoire pour valider la Réservation
 
 #### Scénario 1 — Happy path
 
@@ -210,7 +210,7 @@ Then aucun Billet n'est émis
 
 ---
 
-### Invariant 8 — Conformité du Billet avec la Réservation
+### Invariant 4 — Conformité du Billet avec la Réservation
 
 #### Scénario 1 — Happy path
 
