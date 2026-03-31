@@ -59,6 +59,6 @@
 
 ## Schéma UML des agrégats
 
-![diagramme](./agregat_evenement.png)
+![diagramme](./media/agregat_evenement.png)
 
-![diagramme](./agregat_reservation.png)
+![diagramme](./media/agregat_reservation.png)

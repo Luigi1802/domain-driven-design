@@ -2,7 +2,7 @@
 
 ## Schéma général
 
-![diagramme](./context-map.png)
+![diagramme](./media/context-map.png)
 
 Diagramme context map des Bounded Contexts et leurs liens.
 
