@@ -18,7 +18,6 @@
 | `Place` | Objet Valeur | Unité de réservation dans une CatégoriePlace |
 | `Horaires d'un Évènement` | Objet Valeur | Heure de début et heure de fin |
 | `OuvertureRéservations` | Objet Valeur | Date à partir de laquelle la réservation est possible |
-| `AffichagePromotionnel` | Objet Valeur | Statut promotionnel de l'Évènement |
 
 ### Invariants métier
 
@@ -51,7 +50,7 @@
 
 | Invariant | Description métier | Conséquence si non respecté |
 |-----------|--------------------|----------------------------|
-| **Unicité de Place par Évènement** | Une Place ne peut être attribuée qu'à un seul Spectateur pour un Évènement donné. Dès qu'une Place est ajoutée à un Panier (VerrouillagePlace), elle devient indisponible pour tout autre Spectateur. Cette règle est fondamentale pour garantir l'intégrité des stocks. | Survente d'une même Place, deux Spectateurs se retrouvant avec le même siège, réclamations et perte de crédibilité de la plateforme. |
+| **Unicité de Place par Évènement** | Une Place ne peut être attribuée qu'à un seul Spectateur pour un Évènement donné. Dès qu'une Place est ajoutée à un Panier (VerrouillagePlace), elle devient indisponible pour tout autre Spectateur pendant une période donnée. Cette règle est fondamentale pour garantir l'intégrité des stocks. | Survente d'une même Place, deux Spectateurs se retrouvant avec le même siège, réclamations et perte de crédibilité de la plateforme. |
 | **Délai de verouillage du Panier** | Un VerrouillagePlace a une durée de vie limitée. Si le Spectateur ne valide pas son Paiement dans le délai imparti, les Places sont libérées et redeviennent disponibles à la Réservation. Ce délai évite la rétention abusive de Places. | Blocage de Places indéfiniment sans intention d'achat, pénurie artificielle, frustration des Spectateurs souhaitant réserver. |
 | **Paiement obligatoire pour valider la Réservation** | Une Réservation n'est considérée comme confirmée et un Billet ne peut être émis que si le Paiement a été autorisé avec succès. Un Paiement échoué ou absent maintient la Réservation à l'état en attente. Les Places retournent dans le stock disponible en cas d'échec définitif. | Émission de Billets sans encaissement, perte de revenus, Places considérées comme vendues sans contrepartie financière. |
 | **Conformité du Billet avec la Réservation** | Le Billet émis doit correspondre exactement à la Réservation validée : même Spectateur, même Place, même Évènement, même CatégoriePlace et même tarif payé. Aucune modification de ces informations n'est possible après l'émission du Billet. | Billets frauduleux ou incohérents, accès de Spectateurs à des places non réservées, réclamations et litiges. |
