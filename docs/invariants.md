@@ -12,10 +12,8 @@
 | Élément | Type | Description |
 |---------|------|-------------|
 | `Évènement` | Entité racine | Prestation d'un Artiste dans une Salle à une Date donnée |
-| `Artiste` | Objet Valeur | Entité se produisant lors de l'Évènement (solo, groupe, compagnie) |
-| `Salle` | Objet Valeur | Lieu géographique avec ses CatégoriePlaces et Places |
-| `CatégoriePlace` | Objet Valeur | Tranche tarifaire et zone géographique dans la Salle |
-| `Place` | Objet Valeur | Unité de réservation dans une CatégoriePlace |
+| `Artiste` | Entité interne | Entité se produisant lors de l'Évènement (solo, groupe, compagnie) |
+| `Salle` | Entité interne | Lieu géographique avec ses CatégoriePlaces et Places |
 | `Horaires d'un Évènement` | Objet Valeur | Heure de début et heure de fin |
 | `OuvertureRéservations` | Objet Valeur | Date à partir de laquelle la réservation est possible |
 
@@ -42,8 +40,8 @@
 | `Réservation` | Entité racine | Attribue une Place d'un Évènement à un Spectateur |
 | `Panier` | Entité interne | Ensemble de Places sélectionnées, en attente de paiement |
 | `VerrouillagePlace` | Objet Valeur | Statut temporaire d'une Place ajoutée au Panier |
-| `Paiement` | Objet Valeur | Autorisation de prélèvement bancaire finalisant la Réservation |
-| `Billet` | Objet Valeur | Document attestant de la Réservation, émis après Paiement |
+| `Paiement` | Entité interne | Autorisation de prélèvement bancaire finalisant la Réservation |
+| `Billet` | Entité interne | Document attestant de la Réservation, émis après Paiement |
 | `Date d'une Réservation` | Objet Valeur | Moment où la Réservation a été effectuée sur la plateforme |
 
 ### Invariants métier
